@@ -11,13 +11,20 @@
 > **So that** the data is easy to query
 
 
-## Table: Isle of Wight sales data
+## Table: <branch_id> sales data => data from 1 store
 
-order_id|date_time |product_ids|order_amount|payment_method|
-        |          |           |            |              |
-        |          |           |            |              |
-        |          |           |            |              |
-        |          |           |            |              |
+order_id|date_time|customer_id|product_id |order_amount|payment_method|
+        |         |           |           |            |              |
+        |         |           |           |            |              |
+        |         |           |           |            |              |
+        |         |           |           |            |              |
+
+## Table : Branch ID
+
+branch_id|branch_location|branch_address|
+         |               |              |
+         |               |              |
+         |               |              |
 
 
 ## Table: Products
