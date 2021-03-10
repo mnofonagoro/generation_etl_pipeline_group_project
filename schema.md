@@ -22,20 +22,25 @@ order_id|date_time |product_ids|order_amount|payment_method|
 
 ## Table: Products
 
-product_id|product_name|product_size|product_price|
-          |            |            |             |
-          |            |            |             |
-          |            |            |             |
+product_id|product_name|product_size_id|product_price|
+          |            |               |             |
+          |            |               |             |
+          |            |               |             |
 
+## Table: Products size
 
+id|product_size|
+1 |small       | 
+2 |medium      |
+3 |large       |
+4 |standard    |
 
 ## Table: PII
 
 customer_id|first_name|last_name|
 
 
-
-## Table: payment method
+## Table: Payment method
 
 id|payment_type
 1 | cash
