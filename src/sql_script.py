@@ -78,20 +78,6 @@ def create_branch_table():
     except Exception as e:
         print(e)
 
-def create_branch_table():
-    try:
-        with psycopg2.connect(database="team-3-group-project", user="root", password="password", host="172.18.0.2", port="5432") as connection:
-            with connection.cursor() as cursor:
-                sql = '''CREATE TABLE IF NOT EXISTS branch(
-                            branch_id SERIAL PRIMARY KEY,
-                            branch_location VARCHAR(100) NOT NULL,
-                            branch_address VARCHAR(100) NOT NULL
-                            )'''
-                cursor.execute(sql)
-                connection.commit()
-    except Exception as e:
-        print(e)
-
 def create_sales_data_table():
     try:
         with psycopg2.connect(database="team-3-group-project", user="root", password="password", host="172.18.0.2", port="5432") as connection:
