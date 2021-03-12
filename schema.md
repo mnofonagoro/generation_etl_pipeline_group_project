@@ -1,10 +1,8 @@
 ## Schema: The information about the structure of the database and how things relate to each other
 
-## Background
-
 # Before storing our data we must design a schema for it so that we can create it in our database.
 
-### User Story
+## User Story
 
 > **As a** product owner
 > **I want to** agree on the design of the schema
@@ -13,11 +11,19 @@
 
 ## Table: <branch_id> sales data => data from 1 store
 
-order_id|date_time|customer_id|product_id |order_amount|payment_method|
-        |         |           |           |            |              |
-        |         |           |           |            |              |
-        |         |           |           |            |              |
-        |         |           |           |            |              |
+order_id|date_time|customer_id|order_amount|payment_method_id|
+        |         |           |            |                 |
+        |         |           |            |                 |
+        |         |           |            |                 |
+
+
+## Table: Per transaction?
+
+product_id|
+          |
+          |
+          |
+
 
 ## Table : Branch ID
 
@@ -34,13 +40,14 @@ product_id|product_name|product_size_id|product_price|
           |            |               |             |
           |            |               |             |
 
-## Table: Products size
+enum data type
+## Table: Products size >> not nessecary
 
-id|product_size|
-1 |small       | 
-2 |medium      |
-3 |large       |
-4 |standard    |
+product_size_id|product_size|
+1              |standard    | 
+2              |regular     |
+3              |large       |
+
 
 ## Table: PII
 
@@ -49,9 +56,10 @@ customer_id|first_name|last_name|
 
 ## Table: Payment method
 
-id|payment_type
-1 | cash
-2 | card
+payment_method_id|payment_type
+1                | cash
+2                | card
+3                | other
 
 
 
