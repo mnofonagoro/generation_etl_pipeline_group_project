@@ -9,57 +9,34 @@
 > **So that** the data is easy to query
 
 
-## Table: <branch_id> sales data => data from 1 store
+## Table: transaction
 
-order_id|date_time|customer_id|order_amount|payment_method_id|
-        |         |           |            |                 |
-        |         |           |            |                 |
-        |         |           |            |                 |
-
-
-## Table: Per transaction?
-
-product_id|
-          |
-          |
-          |
+transaction_id|date_time|transaction_total|branch_id|
+              |         |                 |         |                
+              |         |                 |         |                
+              |         |                 |         |                 
 
 
-## Table : Branch ID
+## Table: basket
 
-branch_id|branch_location|branch_address|
-         |               |              |
-         |               |              |
-         |               |              |
+basket_id |product_id|transaction_id|
+          |          |              |
+          |          |              |
+          |          |              |
+
+
+## Table : Branch 
+
+branch_id|branch_location|
+         |               |
+         |               |
+         |               |
 
 
 ## Table: Products
 
-product_id|product_name|product_size_id|product_price|
-          |            |               |             |
-          |            |               |             |
-          |            |               |             |
-
-enum data type
-## Table: Products size >> not nessecary
-
-product_size_id|product_size|
-1              |standard    | 
-2              |regular     |
-3              |large       |
-
-
-## Table: PII
-
-customer_id|first_name|last_name|
-
-
-## Table: Payment method
-
-payment_method_id|payment_type
-1                | cash
-2                | card
-3                | other
-
-
+product_id|product_name|product_size|product_price|
+          |            |            |             |
+          |            |            |             |
+          |            |            |             |
 
