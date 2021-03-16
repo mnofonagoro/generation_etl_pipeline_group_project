@@ -5,20 +5,23 @@ from connecting_to_db import create_db_connection
 
 connection = create_db_connection()
 
-def create_product_size_type():
-    try:
-        with connection.cursor() as cursor:
-            sql = '''CREATE TYPE product_size AS ENUM 
-                    ('Standard' , 'Regular' , 'Large')'''
-            cursor.execute(sql)        
-            connection.commit()
-    except Exception as e:
-        print(e)
+# def create_product_size_type():
+#     try:
+#         with connection.cursor() as cursor:
+#             sql = '''CREATE TYPE product_size AS ENUM 
+#                     ('Standard' , 'Regular' , 'Large')'''
+#             cursor.execute(sql)        
+#             connection.commit()
+#     except Exception as e:
+#         print(e)
 
 def create_product_table():
     try:
         with connection.cursor() as cursor:
-            sql = '''CREATE TABLE IF NOT EXISTS product(
+            sql = '''DROP TYPE IF EXISTS product_size;
+            CREATE TYPE product_size AS ENUM 
+                    ('Standard' , 'Regular' , 'Large');
+            CREATE TABLE IF NOT EXISTS product(
                         product_id SERIAL PRIMARY KEY,
                         product_name VARCHAR(100) NOT NULL,
                         product_size product_size,
@@ -46,7 +49,7 @@ def create_transaction_table():
         with connection.cursor() as cursor:
             sql = '''CREATE TABLE IF NOT EXISTS transaction(
                         transaction_id SERIAL PRIMARY KEY,
-                        date_time TIMESTAMP,
+                        date_time TIMESTAMP NOT NULL,
                         transaction_total FLOAT NOT NULL,
                         branch_id INT,
                         CONSTRAINT fk_branch FOREIGN KEY(branch_id) REFERENCES branch(branch_id)
@@ -71,13 +74,25 @@ def create_basket_table():
     except Exception as e:
         print(e)
 
+def import_product_id():
+    pass
+
+def import_transaction_id():
+    pass
+
 def close_connection():
     return connection.close()
 
-create_product_size_type()
+# create_product_size_type()
+
 create_product_table()
+
 create_branch_table()
+
 create_transaction_table()
+
 create_basket_table()
+
+
 close_connection()
 print("Your tables have been created successfully")
