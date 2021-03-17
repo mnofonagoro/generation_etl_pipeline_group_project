@@ -16,7 +16,7 @@ def insert_into_product_table():
                 
                 cursor.execute(sql)
                 connection.commit() 
-            
+  
     except Exception as e:
         print(e)
     

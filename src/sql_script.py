@@ -91,7 +91,7 @@ create_branch_table()
 
 create_transaction_table()
 
-create_basket_table()
+# create_basket_table()
 
 
 close_connection()

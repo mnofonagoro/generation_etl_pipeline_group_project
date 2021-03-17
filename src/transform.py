@@ -1,5 +1,13 @@
 import csv
 
+list_of_orders = []
+
+
+list_no_dup = []
+
+
+list_of_orders_with_index = []
+
 def extract_and_remove_sensitive_data():
         
     data = [] 
@@ -26,6 +34,7 @@ def extract_and_remove_sensitive_data():
 
 def products_from_orders(data):
     # print(data[-1])
+    # list_of_orders = []
     products_ordered = []
     for d in data:
         items = d['order']
@@ -33,6 +42,8 @@ def products_from_orders(data):
         total = len(single_order)
         n = 0
         my_order = []
+        # print(single_order)
+        # print(my_order)
         while n < total:                
             product_name = single_order[(n+1)]     
             product_price = single_order[(n+2)]   
@@ -41,12 +52,17 @@ def products_from_orders(data):
                 product_size = 'Standard'
             new_product = { 'product_name': product_name,
                             'product_size': product_size,
-                            'product_price':product_price}
+                            'product_price':product_price
+                            }
             products_ordered.append(new_product)
             # 'order' is now a list of product dictionaries
+            
             my_order.append(new_product)
             d['order'] = my_order
+            # print(new_product)
             n += 3
+            list_of_orders.append(my_order)
+    # print(list_of_orders)        
     return products_ordered
 
 
@@ -59,7 +75,20 @@ def products_list_no_duplicates(products):
             products_no_duplicates.append(product)
     return products_no_duplicates
 
-
+def list_no_duplicates():
+    # list_no_duplicates = []
+    for p in list_of_orders:
+        if p in list_no_dup:
+            pass
+        else:
+            list_no_dup.append(p)
+    # print(list_no_duplicates)
+    # return list_no_duplicates
+        
+    
+    
+    
+    
 def date_time(data):
     date_time_list = []
     
@@ -96,8 +125,27 @@ if __name__ == '__main__':
     data = extract_and_remove_sensitive_data()
     products = products_from_orders(data)
     # print(products_list_no_duplicates(products))
-    # products_list_no_duplicates(products)
+    products_list_no_duplicates(products)
+    list_no_duplicates()
     # extract_and_remove_sensitive_data()
-    print(branch_location(data))   
+    # print(branch_location(data))   
+    # print(products_list_no_duplicates(products))
 
 
+def list_of_orders_indexed():
+    count = 1
+    for order in list_of_orders:
+        # print(order)
+        for dicct in order:
+            dicct["id"] = count
+            # print(dicct)
+            # int(list_of_orders.index(order)) 
+        count += 1
+        list_of_orders_with_index.append(order)
+    return list_of_orders_with_index
+    
+    
+# orders_and_products = {}
+# for item in list_no_dup
+# a = list_no_dup["product_name"]
+# b = list_no_dup["product_size"]

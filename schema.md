@@ -20,9 +20,16 @@ transaction_id|date_time|transaction_total|branch_id|
 ## Table: basket
 
 basket_id |product_id|transaction_id|
-          |          |              |
-          |          |              |
-          |          |              |
+    1     |     1    |     1        |
+    1     |     2    |     1        |
+    1     |     1    |     1        |
+    2     |     3    |     2        |
+    3     |     4    |     3        |
+    3     |     5    |     3        |
+    3     |     6    |     3        |
+    3     |     7    |     3        |
+
+
 
 
 ## Table : Branch 
