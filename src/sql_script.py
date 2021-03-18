@@ -63,7 +63,6 @@ def create_basket_table():
     try:
         with connection.cursor() as cursor:
             sql = '''CREATE TABLE IF NOT EXISTS basket(
-                        basket_id SERIAL PRIMARY KEY,
                         product_id INT,
                         transaction_id INT,
                         CONSTRAINT fk_product_id FOREIGN KEY(product_id) REFERENCES product(product_id),

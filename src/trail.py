@@ -1,0 +1,237 @@
+def clear(): return os.system('cls' if os.name == 'nt' else 'clear')
+from connecting_to_db import create_db_connection
+import csv
+
+
+def extract_and_remove_sensitive_data():
+        
+    data = [] 
+    
+    # print("Extracting...")
+    try:
+        with open('/workspace/2021-02-23-isle-of-wight.csv', 'r') as file:
+            fieldnames=['date_time','location','full_name','order','payment_type','amount','card_details']
+            source_file = csv.DictReader(file, fieldnames = fieldnames, delimiter=',')
+            next(source_file) #ignore the header row
+            for row in source_file:
+                row = dict(row)
+                if 'card_details' in row:
+                    del row['card_details']
+                if 'full_name' in row:
+                    del row['full_name']
+                if 'payment_type' in row:
+                    del row['payment_type']
+                data.append(row)
+            # print("Successfully Extracted")
+    except Exception as error:
+        print("An error occurred: " + str(error))
+    return data
+
+def products_from_orders(data):
+    # print(data[-1])
+    list_of_all = []
+    # list_of_orders = []
+    products_ordered = []
+    for d in data:
+        items = d['order']
+        single_order = items.split(",")
+        # print(single_order)
+        total = len(single_order)
+        # print(total)
+        n = 0
+        my_order = []
+        products_of_transcation = []
+        list_of_all.append(products_of_transcation)
+        products_of_transcation.clear()
+        # print(single_order)
+        # print(my_order)
+        while n < total:                
+            product_size = single_order[(n)]                       
+            product_name = single_order[(n+1)]     
+            product_price = single_order[(n+2)]   
+            if product_size == '':
+                product_size = 'Standard'
+            new_product = { 'product_name': product_name,
+                            'product_size': product_size,
+                            'product_price':product_price
+                            }
+            products_of_transcation.append(new_product)
+            # products_ordered.append(new_product)
+            n += 3
+            # 'order' is now a list of product dictionaries
+            # print(my_order)
+            # print(products_ordered)
+            # print("YESSSSS")
+            # my_order.append(new_product)
+            # d['order'] = my_order
+            # print(new_product)
+        # n += 3
+        # list_of_orders.append(my_order)
+    # print(list_of_all[50:])        
+    return list_of_all
+
+def list_no_duplicates(list_of_all):
+    list_not_duplicated = []
+    for p in list_of_all:
+        for tr in p: 
+            if tr not in list_not_duplicated:
+                list_not_duplicated.append(tr)
+            else:
+                pass  
+    
+    # print(list_not_duplicated)
+    return list_not_duplicated
+
+def list_of_orders_indexed(list_of_all):
+    list_of_orders_with_transac_id = []
+    count = 0
+    for order in list_of_all:
+        # print(order)
+        count += 1
+        for dicct in order:
+            dicct["transaction_id"] = count
+            # print(dicct)
+            # int(list_of_orders.index(order)) 
+        list_of_orders_with_transac_id.append(order)
+    # print(list_of_orders_with_transac_id[0:10])
+    return list_of_orders_with_transac_id
+
+
+data = extract_and_remove_sensitive_data()
+list_of_all = products_from_orders(data)
+list_not_duplicated = list_no_duplicates(list_of_all)
+list_of_orders_indexed(list_of_all)
+list_of_orders_with_transac_id = list_of_orders_indexed(list_of_all)
+
+connection = create_db_connection()
+
+
+
+## Extracting all products and their ids from the products table into a temporary data structure 
+# replace the name from my list_of _transactions with the corresponding numbers from the joint_2 list below 
+def get_product_id_db():
+    product_id_list = []
+    try:
+            with connection.cursor() as cursor:
+                sql = "SELECT product_id FROM product"    
+                cursor.execute(sql)
+                my_result = cursor.fetchall()
+                for id in my_result:
+                    product_id_list.append(id[0])
+    except Exception as e:
+        print(e)         
+    return product_id_list
+
+
+def get_product_name_db():
+    product_name_list = []
+    try:
+            with connection.cursor() as cursor:
+                sql = "SELECT product_name FROM product"    
+                cursor.execute(sql)
+                my_result_2 = cursor.fetchall()
+                for name in my_result_2:
+                    product_name_list.append(name[0])
+    except Exception as e:
+        print(e)    
+    return product_name_list  
+
+
+
+
+def get_product_size_db():
+    product_size_list = []
+    try:
+            with connection.cursor() as cursor:
+                sql = "SELECT product_size FROM product"    
+                cursor.execute(sql)
+                my_result_3 = cursor.fetchall()
+                for size in my_result_3:
+                    product_size_list.append(size[0])
+    except Exception as e:
+        print(e)
+    return product_size_list     
+
+
+
+
+def zipping_product_stuff():
+    joint_three = (list(zip(get_product_id_db(), get_product_name_db(),  get_product_size_db())))
+    return joint_three
+
+
+# print("\n")
+# print("\n")
+# print("\n")
+# print("\n")
+
+
+def convert_tuple_to_dict(joint_three):
+    transaction_basket_list_dict = []
+
+    for j in joint_three:
+        new_productss = { 'product_id': j[0],
+                        'product_name': j[1],
+                        'product_size':j[2]
+                        }
+        transaction_basket_list_dict.append(new_productss)
+    return transaction_basket_list_dict
+    
+
+
+def basket_table(transaction_basket_list_dict):
+    happy_list = []
+    for i in list_of_orders_with_transac_id:
+        for dicct in i:
+            for x in transaction_basket_list_dict:
+                if dicct["product_name"] == x["product_name"] and dicct["product_size"] == x["product_size"]:
+                    new_productsss = { 'product_id': x['product_id'],
+                        'transaction_id': dicct['transaction_id']
+
+                        }
+                    happy_list.append(new_productsss)
+    # print(happy_list)
+    return(happy_list)
+
+
+def date_time(data):
+    date_time_list = []
+    
+    for item in data:
+        date_time = item['date_time']
+        date_time_list.append(date_time)
+        
+    return date_time_list
+
+def branch_location(data):
+    branch_location_list = []
+    branch_location_list_unique = []
+    for item in data:
+        branch_location = item['location']
+        branch_location_list.append(branch_location)
+        branch_location_list_unique = set(branch_location_list)
+    
+    return branch_location_list_unique
+     
+def amount(data):
+    amount_list = []
+    
+    for item in data:
+
+        amount = item['amount']
+        amount_list.append(amount)
+        
+    return amount_list
+
+
+
+data = extract_and_remove_sensitive_data()
+list_of_all = products_from_orders(data)
+list_not_duplicated = list_no_duplicates(list_of_all)
+list_of_orders_indexed(list_of_all)
+list_of_orders_with_transac_id = list_of_orders_indexed(list_of_all)
+joint_three = zipping_product_stuff()
+transaction_basket_list_dict = convert_tuple_to_dict(joint_three)
+basket_table(transaction_basket_list_dict)
+
+# print(list_not_duplicated)
