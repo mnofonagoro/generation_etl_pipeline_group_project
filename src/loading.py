@@ -1,12 +1,11 @@
-from connecting_to_db import create_db_connection
-from transform import *
 
-data = extract_and_remove_sensitive_data()
-products = products_from_orders(data)
-# products_list_no_duplicates(products)
+from connecting_to_db import create_db_connection
+from trail import *
+
+
 
 def insert_into_product_table():
-    products_list_unique = products_list_no_duplicates(products)
+    products_list_unique = list_not_duplicated 
     try:
         connection = create_db_connection()
         with connection.cursor() as cursor:
@@ -41,23 +40,27 @@ def insert_into_transaction_table():
         amount_var = amount(data)
         date_time_var = date_time(data)
         connection = create_db_connection()
+        branch_id = int("1")
         with connection.cursor() as cursor:
             for datetime, amt in zip(date_time_var, amount_var):
-                sql = f"INSERT INTO transaction (date_time, transaction_total) VALUES ('{datetime}', '{amt}')"
+                sql = "INSERT INTO transaction (date_time, transaction_total, branch_id)  VALUES ('{}', '{}', {})".format(datetime, amt, branch_id) 
                 cursor.execute(sql)
             connection.commit()
     except Exception as e:
-        print(e)
-        
-     
+        print(e) 
+ 
+ 
 def insert_into_basket_table():
     try:
-          
+        product_and_transaction_list = basket_table(transaction_basket_list_dict)  
         connection = create_db_connection()
         with connection.cursor() as cursor:
-            sql = f"INSERT INTO basket (product_id, transaction_id) VALUES ('{x}', '{y}')"
-            cursor.execute(sql)
-        connection.commit()
+            for row in product_and_transaction_list:
+                sql = f"""INSERT INTO basket (product_id, transaction_id)
+                    VALUES ('{row['product_id']}', '{row['transaction_id']}')"""   
+                    
+                cursor.execute(sql)
+                connection.commit()
     except Exception as e:
         print(e)
         
@@ -66,3 +69,4 @@ def insert_into_basket_table():
 insert_into_product_table()
 insert_into_branch_table()
 insert_into_transaction_table()
+insert_into_basket_table()
