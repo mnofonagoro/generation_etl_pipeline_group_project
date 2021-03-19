@@ -1,4 +1,3 @@
-
 from connecting_to_db import create_db_connection
 from trail import *
 
@@ -64,8 +63,7 @@ def insert_into_basket_table():
     except Exception as e:
         print(e)
         
-        
-        
+              
 insert_into_product_table()
 insert_into_branch_table()
 insert_into_transaction_table()
