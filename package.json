@@ -1,0 +1,28 @@
+{
+  "name": "workspace",
+  "version": "1.0.0",
+  "description": "-\tFinish at a certain time – cut off time for work is 5.30pm \r -\tAlthough some people work at different times of day – also people work at different speeds\r -\tEveryone should feel free to say if they’re fatigued \r -\tThere’s going to be overtime but not let it happen too often\r -\tAvoid work on weekends – but sometimes unavoidable  \r -\tdepends on person\r -\trespect others obligations",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/generation-DELON02/team-3-project.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/generation-DELON02/team-3-project/issues"
+  },
+  "homepage": "https://github.com/generation-DELON02/team-3-project#readme",
+  "dependencies": {
+    "aws-sso-credentials-getter": "^1.2.2",
+    "serverless": "^2.30.3",
+    "serverless-iam-roles-per-function": "^3.1.0",
+    "serverless-python-requirements": "^5.1.0"
+  }
+}

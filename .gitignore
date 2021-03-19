@@ -1,5 +1,7 @@
 #vscode settings
 .vscode/
+node_modules/
+.serverless
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
@@ -130,3 +132,8 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+test_play.py
+play2.py
+.gitignore
+data-normalisation.md
+play.py
