@@ -200,5 +200,5 @@ if __name__ == '__main__':
     list_of_orders_with_transac_id = list_of_orders_indexed(list_of_all)
     joint_three = zipping_product_stuff()
     transaction_basket_list_dict = convert_tuple_to_dict(joint_three)
-    print(list_of_orders_with_transac_id[0:2])
+    # print(list_of_orders_with_transac_id[0:2])
     

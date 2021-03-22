@@ -64,7 +64,7 @@ def insert_into_basket_table():
         print(e)
         
               
-insert_into_product_table()
-insert_into_branch_table()
-insert_into_transaction_table()
-insert_into_basket_table()
+# insert_into_product_table()
+# insert_into_branch_table()
+# insert_into_transaction_table()
+# insert_into_basket_table()

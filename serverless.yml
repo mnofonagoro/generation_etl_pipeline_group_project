@@ -37,8 +37,7 @@ package:
 functions:
   team3-etl: 
     handler: src/team3etl/handler.handle
-    iamRoleStatementsName: team-3-execution-role
-    timeout: 300
+    timeout: 300000
     events:
       - s3:
           bucket: team3testbucket2

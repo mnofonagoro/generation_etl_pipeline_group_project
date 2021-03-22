@@ -111,7 +111,7 @@ RUN sudo apt-get upgrade -y
 RUN curl -fsSL https://deb.nodesource.com/setup_14.x | bash -
 RUN sudo apt-get install -y nodejs
 
-# RUN aws sso login --profile learner-farhiya
+# aws sso login --profile learner-farhiya
 # npm install aws-sso-credentials-getter
 # npx ssocred learner-farhiya
 # npx sls deploy --aws-profile learner-farhiya
