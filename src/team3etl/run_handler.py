@@ -1,4 +1,7 @@
-from handler import handler
+from src.team3etl.handler import handler
+# from handler import handler
+
+
 test_event = {
     "Records": [
         {
@@ -12,6 +15,7 @@ test_event = {
             },
             "requestParameters": {
                 "sourceIPAddress": "127.0.0.1"
+                # "sourceIPAddress": "172.18.0.3"
             },
             "responseElements": {
                 "x-amz-request-id": "EXAMPLE123456789",
@@ -21,11 +25,11 @@ test_event = {
                 "s3SchemaVersion": "1.0",
                 "configurationId": "testConfigRule",
                 "bucket": {
-                    "name": "team5-final-project",
+                    "name": "team3-final-project",
                     "ownerIdentity": {
                         "principalId": "EXAMPLE"
                     },
-                    "arn": "arn:aws:s3:::team5-final-project"
+                    "arn": "arn:aws:s3:::team3-final-project"
                 },
                 "object": {
                     "key": "2021-02-23-isle-of-wight.csv",
@@ -37,4 +41,4 @@ test_event = {
         }
     ]
 }
-handler(test_event, {})
+handler.handler(test_event, {})

@@ -104,6 +104,20 @@ RUN sudo apt-get install python3-pip -y
 #Install psycopg2 for the postresql database
 RUN pip3 install psycopg2-binary
 
+#serverless stuff
+
+RUN sudo apt-get update
+RUN sudo apt-get upgrade -y
+RUN curl -fsSL https://deb.nodesource.com/setup_14.x | bash -
+RUN sudo apt-get install -y nodejs
+
+# RUN aws sso login --profile learner-farhiya
+# npm install aws-sso-credentials-getter
+# npx ssocred learner-farhiya
+# npx sls deploy --aws-profile learner-farhiya
+## https://aws-generation.awsapps.com/start/#
+
+
     #
     # Clean up
     #

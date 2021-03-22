@@ -1,6 +1,9 @@
-def clear(): return os.system('cls' if os.name == 'nt' else 'clear')
-from connecting_to_db import create_db_connection
 import csv
+import os
+from src.connecting_to_db import create_db_connection
+
+
+def clear(): return os.system('cls' if os.name == 'nt' else 'clear')
 
 def extract_and_remove_sensitive_data():
         
