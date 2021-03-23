@@ -5,7 +5,7 @@ def create_db_connection():
                     database="team-3-group-project",
                     user="root", 
                     password="password", 
-                    host="172.18.0.3", 
+                    host="172.18.0.2", 
                     port="5432"
                     )
     return connection

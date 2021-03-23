@@ -1,7 +1,8 @@
 import csv
 import os
-from src.connecting_to_db import create_db_connection
+from connecting_to_db import create_db_connection
 
+connection = create_db_connection()  
 
 def clear(): return os.system('cls' if os.name == 'nt' else 'clear')
 
@@ -68,25 +69,20 @@ def list_no_duplicates(list_of_all):
                 list_not_duplicated.append(tr)
             else:
                 pass  
-    
-    # print(list_not_duplicated)
     return list_not_duplicated
 
 def list_of_orders_indexed(list_of_all):
     list_of_orders_with_transac_id = []
     count = 0
     for order in list_of_all:
-        # print(order)
         count += 1
         for dicct in order:
             dicct["transaction_id"] = count
-            # print(dicct)
-            # int(list_of_orders.index(order)) 
         list_of_orders_with_transac_id.append(order)
-    # print(list_of_orders_with_transac_id[0:10])
     return list_of_orders_with_transac_id
 
 ## Extracting all products and their ids from the products table into a temporary data structure 
+# this only works if the products is created and populated 
 
 def get_product_id_db():
     product_id_list = []
@@ -128,38 +124,32 @@ def get_product_size_db():
     return product_size_list     
 
 def zipping_product_stuff():
-    joint_three = (list(zip(get_product_id_db(), get_product_name_db(),  get_product_size_db())))
+    joint_three = (list(zip(get_product_id_db(), get_product_name_db(), get_product_size_db())))
     return joint_three
 
-# print("\n")
-# print("\n")
-# print("\n")
-# print("\n")
-
 def convert_tuple_to_dict(joint_three):
-    transaction_basket_list_dict = []
+    unique_prod_id_name_size = []
 
     for j in joint_three:
-        new_productss = { 'product_id': j[0],
+        new_productss = {'product_id': j[0],
                         'product_name': j[1],
                         'product_size':j[2]
                         }
-        transaction_basket_list_dict.append(new_productss)
-    return transaction_basket_list_dict
+        unique_prod_id_name_size.append(new_productss)
+    return unique_prod_id_name_size
     
-def basket_table(transaction_basket_list_dict):
-    happy_list = []
+def basket_table(unique_prod_id_name_size, list_of_orders_with_transac_id):
+    product_and_transaction_ids = []
     for i in list_of_orders_with_transac_id:
         for dicct in i:
-            for x in transaction_basket_list_dict:
+            for x in unique_prod_id_name_size:
                 if dicct["product_name"] == x["product_name"] and dicct["product_size"] == x["product_size"]:
-                    new_productsss = { 'product_id': x['product_id'],
+                    unique_products = { 'product_id': x['product_id'],
                         'transaction_id': dicct['transaction_id']
 
                         }
-                    happy_list.append(new_productsss)
-    # print(happy_list)
-    return(happy_list)
+                    product_and_transaction_ids.append(unique_products)
+    return(product_and_transaction_ids)
 
 def date_time(data):
     date_time_list = []
@@ -196,9 +186,9 @@ if __name__ == '__main__':
     data = extract_and_remove_sensitive_data()
     list_of_all = products_from_orders(data)
     list_not_duplicated = list_no_duplicates(list_of_all)
-    list_of_orders_indexed(list_of_all)
     list_of_orders_with_transac_id = list_of_orders_indexed(list_of_all)
+
+    # # this only works if the products is created and populated
     joint_three = zipping_product_stuff()
-    transaction_basket_list_dict = convert_tuple_to_dict(joint_three)
-    # print(list_of_orders_with_transac_id[0:2])
-    
+    unique_prod_id_name_size = convert_tuple_to_dict(joint_three)
+    product_and_transaction_ids = basket_table(unique_prod_id_name_size, list_of_orders_with_transac_id)

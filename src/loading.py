@@ -1,5 +1,6 @@
 from connecting_to_db import create_db_connection
 from trail import *
+from sql_script import *
 
 
 
@@ -51,7 +52,7 @@ def insert_into_transaction_table():
  
 def insert_into_basket_table():
     try:
-        product_and_transaction_list = basket_table(transaction_basket_list_dict)  
+        product_and_transaction_list = product_and_transaction_ids 
         connection = create_db_connection()
         with connection.cursor() as cursor:
             for row in product_and_transaction_list:
@@ -63,8 +64,28 @@ def insert_into_basket_table():
     except Exception as e:
         print(e)
         
-              
-# insert_into_product_table()
-# insert_into_branch_table()
-# insert_into_transaction_table()
-# insert_into_basket_table()
+
+create_product_table()
+create_branch_table()
+create_transaction_table()
+create_basket_table()
+close_connection()
+
+print("Your tables have been created successfully")
+
+data = extract_and_remove_sensitive_data()
+list_of_all = products_from_orders(data)
+list_not_duplicated = list_no_duplicates(list_of_all)
+list_of_orders_with_transac_id = list_of_orders_indexed(list_of_all)
+
+insert_into_product_table()
+
+# this only works if the products table is created and populated as it depend on it to fetch the tuples.
+joint_three = zipping_product_stuff()
+unique_prod_id_name_size = convert_tuple_to_dict(joint_three)
+product_and_transaction_ids = basket_table(unique_prod_id_name_size, list_of_orders_with_transac_id)
+
+
+insert_into_branch_table()
+insert_into_transaction_table()
+insert_into_basket_table()
