@@ -22,7 +22,9 @@
   "dependencies": {
     "aws-sso-credentials-getter": "^1.2.2",
     "serverless": "^2.30.3",
-    "serverless-iam-roles-per-function": "^3.1.0",
+    "serverless-iam-roles-per-function": "^3.1.0"
+  },
+  "devDependencies": {
     "serverless-python-requirements": "^5.1.0"
   }
 }
