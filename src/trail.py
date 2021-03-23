@@ -6,16 +6,17 @@ connection = create_db_connection()
 
 def clear(): return os.system('cls' if os.name == 'nt' else 'clear')
 
-def extract_and_remove_sensitive_data():
+def extract_and_remove_sensitive_data(file):
         
     data = [] 
     
     # print("Extracting...")
     try:
-        with open('/workspace/2021-02-23-isle-of-wight.csv', 'r') as file:
             fieldnames=['date_time','location','full_name','order','payment_type','amount','card_details']
             source_file = csv.DictReader(file, fieldnames = fieldnames, delimiter=',')
             next(source_file) #ignore the header row
+            
+            
             for row in source_file:
                 row = dict(row)
                 if 'card_details' in row:
@@ -29,6 +30,8 @@ def extract_and_remove_sensitive_data():
     except Exception as error:
         print("An error occurred: " + str(error))
     return data
+
+
 
 def products_from_orders(data):
     list_of_all = []

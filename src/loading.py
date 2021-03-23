@@ -64,28 +64,37 @@ def insert_into_basket_table():
     except Exception as e:
         print(e)
         
+def run_loading(file):
+    create_product_table()
+    create_branch_table()
+    create_transaction_table()
+    create_basket_table()
+    close_connection()
 
-create_product_table()
-create_branch_table()
-create_transaction_table()
-create_basket_table()
-close_connection()
+    print("Your tables have been created successfully")
+    global data
+    data = extract_and_remove_sensitive_data(file) 
+    global list_of_all
+    list_of_all = products_from_orders(data)
+    global list_not_duplicated
+    list_not_duplicated = list_no_duplicates(list_of_all)
+    global list_of_orders_with_transac_id
+    list_of_orders_with_transac_id = list_of_orders_indexed(list_of_all)
 
-print("Your tables have been created successfully")
+    insert_into_product_table()
 
-data = extract_and_remove_sensitive_data()
-list_of_all = products_from_orders(data)
-list_not_duplicated = list_no_duplicates(list_of_all)
-list_of_orders_with_transac_id = list_of_orders_indexed(list_of_all)
-
-insert_into_product_table()
-
-# this only works if the products table is created and populated as it depend on it to fetch the tuples.
-joint_three = zipping_product_stuff()
-unique_prod_id_name_size = convert_tuple_to_dict(joint_three)
-product_and_transaction_ids = basket_table(unique_prod_id_name_size, list_of_orders_with_transac_id)
+    # this only works if the products table is created and populated as it depend on it to fetch the tuples.
+    global joint_three
+    joint_three = zipping_product_stuff()
+    
+    global unique_prod_id_name_size
+    unique_prod_id_name_size = convert_tuple_to_dict(joint_three)
+   
+    global product_and_transaction_ids
+    product_and_transaction_ids = basket_table(unique_prod_id_name_size, list_of_orders_with_transac_id)
 
 
-insert_into_branch_table()
-insert_into_transaction_table()
-insert_into_basket_table()
+    insert_into_branch_table()
+    insert_into_transaction_table()
+    insert_into_basket_table()
+

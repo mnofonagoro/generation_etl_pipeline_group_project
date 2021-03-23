@@ -1,7 +1,6 @@
 plugins:
   - serverless-python-requirements
   - serverless-iam-roles-per-function
-
 custom:
   pythonRequirements:
     slim: true
@@ -27,7 +26,7 @@ package:
     - src/loading.py
     - src/sql_script.py
     - src/trail.py
-    - src/transform.py
+    - requirements.txt
   exclude:
     - src/__pycache__/**
     - src/.pytest_cache/**
@@ -37,7 +36,9 @@ package:
 functions:
   team3-etl: 
     handler: src/team3etl/handler.handle
-    timeout: 300000
+    timeout: 300
+    layers: 
+      - !Ref PythonRequirementsLambdaLayer
     events:
       - s3:
           bucket: team3testbucket2
