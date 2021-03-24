@@ -1,5 +1,6 @@
 from os import read
 from loading import run_loading
 #for running locally
-file = open('/workspace/2021-02-23-isle-of-wight.csv')
+path = '/workspace/2021-02-23-isle-of-wight.csv'
+file = open('{}'.format(path))
 run_loading(file)

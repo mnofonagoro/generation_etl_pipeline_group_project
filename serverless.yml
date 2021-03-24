@@ -5,6 +5,7 @@ custom:
   pythonRequirements:
     slim: true
     layer: true
+    dockerizePip: non-linux
 
 
 service: team3-etl
