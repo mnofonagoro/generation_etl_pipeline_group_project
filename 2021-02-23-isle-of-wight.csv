@@ -1,4 +1,3 @@
-date_time,location,full_name,order,payment_type,amount,card_details
 2021-02-23 09:00:48,Isle of Wight,Morgan Berka,"Large,Hot chocolate,2.9,Large,Chai latte,2.6,Large,Hot chocolate,2.9",CASH,8.40,None
 2021-02-23 09:01:45,Isle of Wight,William Perdomo,"Large,Latte,2.45",CARD,2.45,"discover,6011776257398866"
 2021-02-23 09:02:27,Isle of Wight,Amber Roberts,",Frappes - Coffee,2.75,,Cortado,2.05,,Glass of milk,0.7,,Speciality Tea - Camomile,1.3,,Speciality Tea - Camomile,1.3",CARD,8.10,"discover,6011893765428836"

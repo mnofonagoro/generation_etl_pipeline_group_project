@@ -5,7 +5,7 @@ from connecting_to_db import create_db_connection
 connection = create_db_connection()  
 
 def clear(): return os.system('cls' if os.name == 'nt' else 'clear')
-
+file = open('/workspace/2021-02-23-isle-of-wight.csv')
 def extract_and_remove_sensitive_data(file):
         
     data = [] 
@@ -159,6 +159,12 @@ def date_time(data):
     
     for item in data:
         date_time = item['date_time']
+        
+        if len(date_time) >16:
+            date_time = date_time[:-3]
+        else:
+            pass
+ 
         date_time_list.append(date_time)
         
     return date_time_list
@@ -184,9 +190,10 @@ def amount(data):
     return amount_list
 
 
+
 if __name__ == '__main__':
     connection = create_db_connection()            
-    data = extract_and_remove_sensitive_data()
+    data = extract_and_remove_sensitive_data(file)
     list_of_all = products_from_orders(data)
     list_not_duplicated = list_no_duplicates(list_of_all)
     list_of_orders_with_transac_id = list_of_orders_indexed(list_of_all)
@@ -195,3 +202,5 @@ if __name__ == '__main__':
     joint_three = zipping_product_stuff()
     unique_prod_id_name_size = convert_tuple_to_dict(joint_three)
     product_and_transaction_ids = basket_table(unique_prod_id_name_size, list_of_orders_with_transac_id)
+    
+    print(date_time(data)[:5])
