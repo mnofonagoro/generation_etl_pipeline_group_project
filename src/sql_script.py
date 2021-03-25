@@ -40,7 +40,7 @@ def create_transaction_table():
         with connection.cursor() as cursor:
             sql = '''CREATE TABLE IF NOT EXISTS transaction(
                         transaction_id SERIAL PRIMARY KEY,
-                        date_time TIMESTAMP NOT NULL,
+                        date_time VARCHAR(100) NOT NULL,
                         transaction_total FLOAT NOT NULL,
                         branch_id INT,
                         CONSTRAINT fk_branch FOREIGN KEY(branch_id) REFERENCES branch(branch_id)
