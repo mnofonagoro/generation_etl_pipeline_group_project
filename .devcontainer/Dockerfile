@@ -114,6 +114,8 @@ RUN sudo apt-get install -y nodejs
 # aws sso login --profile learner-farhiya
 # npm install aws-sso-credentials-getter
 # npx ssocred learner-farhiya
+# npm i -D serverless-dotenv-plugin
+
 # npx sls deploy --aws-profile learner-farhiya
 ## https://aws-generation.awsapps.com/start/#
 
