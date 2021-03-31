@@ -111,9 +111,12 @@ RUN sudo apt-get upgrade -y
 RUN curl -fsSL https://deb.nodesource.com/setup_14.x | bash -
 RUN sudo apt-get install -y nodejs
 
+#aws configure sso 
 # aws sso login --profile learner-farhiya
 # npm install aws-sso-credentials-getter
+
 # npx ssocred learner-farhiya
+## if it doesnt work: run| touch ~/.aws/credentials and re run line 118
 # npm i -D serverless-dotenv-plugin
 
 # npx sls deploy --aws-profile learner-farhiya

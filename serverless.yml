@@ -34,7 +34,6 @@ package:
   include:
     - src/team3etl/**
     - src/__init__.py
-    - src/connecting_to_db.py
     - src/loading.py
     - src/sql_script.py
     - src/trail.py

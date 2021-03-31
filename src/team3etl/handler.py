@@ -1,7 +1,6 @@
-# import boto3
-from src.loading import run_loading
-
 import boto3
+from src.loading import run_loading
+from src.sql_script import *
 import csv
 import psycopg2
 import os
@@ -11,36 +10,30 @@ host = os.environ["HOST"]
 port = os.environ["PORT"]
 user = os.environ["DB_USER"]
 password = os.environ["PASSWORD"]
-
 print(host)
 print(user)
 
 s3 = boto3.client('s3')
 
-def handle(event,context):
-    
+def handle(event, c):
+    print("no 1")
     connection = psycopg2.connect(dbname=dbname, host=host,
                            port=port, user=user, password=password)
-    # print(con)
-    # cursor.execute("SELECT 1", ())
-    # print(cursor.fetchall())
-    # print("OMG it worked!!!!")
-    # # Get key and bucket informaition
-
-    cursor = connection.cursor()
-    
-    
-    # # Get key and bucket informaition
+    print("no 2")   
+    #   Get key and bucket informaition
     key = event['Records'][0]['s3']['object']['key']
     bucket = event['Records'][0]['s3']['bucket']['name']
     # use boto3 library to get object from S3
     s3 = boto3.client('s3')
+    print("HEY")
     s3_object = s3.get_object(Bucket=bucket, Key=key)
+    print("YO")
     data = s3_object['Body'].read().decode('utf-8')
+    print("WASSUP")
     # read CSV
     file = data.splitlines()
-      
-    run_loading(file)
-    
-    # return {"message": "success!!! Check the cloud watch logs for this lambda in cloudwatch https://eu-west-1.console.aws.amazon.com/cloudwatch/home?region=eu-west-1#logsV2:log-groups"}
-
+    print("here1") 
+    run_loading(file,connection)
+    print("here2") 
+    connection.close()
+    return {"message": "success!!! Check the cloud watch logs for this lambda in cloudwatch https://eu-west-1.console.aws.amazon.com/cloudwatch/home?region=eu-west-1#logsV2:log-groups"}

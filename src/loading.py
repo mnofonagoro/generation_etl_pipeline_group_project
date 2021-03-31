@@ -1,12 +1,12 @@
-from connecting_to_db import create_db_connection
+# from connecting_to_db import create_db_connection
 from trail import *
 from sql_script import *
 
 
-def insert_into_product_table(list_not_duplicated_par):
+def insert_into_product_table(list_not_duplicated_par, connection):
     products_list_unique = list_not_duplicated_par
     try:
-        connection = create_db_connection()
+        # connection = create_db_connection()
         with connection.cursor() as cursor:
             for row in products_list_unique:
                 sql = f"""INSERT INTO product (product_name, product_size, product_price)
@@ -19,10 +19,10 @@ def insert_into_product_table(list_not_duplicated_par):
         print(e)
     
     
-def insert_into_branch_table(branch_location_w_par):
+def insert_into_branch_table(branch_location_w_par, connection):
     branch_locations = branch_location_w_par
     try:
-        connection = create_db_connection()
+        # connection = create_db_connection()
         with connection.cursor() as cursor:
             
             for item in branch_locations:
@@ -34,11 +34,11 @@ def insert_into_branch_table(branch_location_w_par):
         print(e)
              
         
-def insert_into_transaction_table(corrected_branch_id, our_data):
+def insert_into_transaction_table(corrected_branch_id, our_data, connection):
     try:
         amount_var = amount(our_data)
         date_time_var = date_time(our_data)
-        connection = create_db_connection()
+        # connection = create_db_connection()
         branch_id = corrected_branch_id['branch_id']  
         with connection.cursor() as cursor:
             for datetime, amt in zip(date_time_var, amount_var):
@@ -49,10 +49,10 @@ def insert_into_transaction_table(corrected_branch_id, our_data):
         print(e) 
  
  
-def insert_into_basket_table(product_and_transaction_ids_var):
+def insert_into_basket_table(product_and_transaction_ids_var, connection):
     try:
         product_and_transaction_list = product_and_transaction_ids_var
-        connection = create_db_connection()
+        # connection = create_db_connection()
         with connection.cursor() as cursor:
             for row in product_and_transaction_list:
                 sql = f"""INSERT INTO basket (product_id, transaction_id)
@@ -85,8 +85,8 @@ def run_loading(file):
     # global list_of_orders_with_transac_id
     list_of_orders_with_transac_id_var = list_of_orders_indexed(list_of_all_products_var)
     # print(list_of_orders_with_transac_id_var[:10])
-    insert_into_product_table(list_not_duplicated_var)
-    insert_into_branch_table(branch_location(our_data))
+    insert_into_product_table(list_not_duplicated_var, con)
+    insert_into_branch_table(branch_location(our_data), con)
     
     # this only works if the products table is created and populated as it depend on it to fetch the tuples.
     # global joint_two 
@@ -102,6 +102,6 @@ def run_loading(file):
     # global product_and_transaction_ids
     product_and_transaction_ids_var = basket_table(unique_prod_id_name_size, list_of_orders_with_transac_id_var)
 
-    insert_into_transaction_table(corrected_branch_id_var, our_data)
-    insert_into_basket_table(product_and_transaction_ids_var)
+    insert_into_transaction_table(corrected_branch_id_var, our_data, con)
+    insert_into_basket_table(product_and_transaction_ids_var, con)
     
