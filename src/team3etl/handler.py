@@ -33,7 +33,7 @@ def handle(event, c):
     # read CSV
     file = data.splitlines()
     print("here1") 
-    run_loading(file,connection)
+    run_loading(file)
     print("here2") 
     connection.close()
     return {"message": "success!!! Check the cloud watch logs for this lambda in cloudwatch https://eu-west-1.console.aws.amazon.com/cloudwatch/home?region=eu-west-1#logsV2:log-groups"}

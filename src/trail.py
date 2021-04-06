@@ -1,12 +1,22 @@
 import csv
 import os
-from connecting_to_db import create_db_connection
+# from connecting_to_db import create_db_connection
+import psycopg2
 
-connection = create_db_connection()  
+dbname = os.environ["DB"]
+host = os.environ["HOST"]
+port = os.environ["PORT"]
+user = os.environ["DB_USER"]
+password = os.environ["PASSWORD"]
+
+connection = psycopg2.connect(dbname=dbname, host=host,
+                           port=port, user=user, password=password)
+
+# connection = create_db_connection()  
 
 def clear(): return os.system('cls' if os.name == 'nt' else 'clear')
 
-file = open('/workspace/birmingham_23-03-2021_09-00-00.csv')
+#file = open('/workspace/birmingham_23-03-2021_09-00-00.csv')
 
 def extract_and_remove_sensitive_data(file):
     data = [] 
@@ -205,8 +215,8 @@ def branch_id_transaction(branch_id_loc, list_of_orders_with_branch):
                 if d["branch_location"] == b["branch_location"]:
                     branch = { 'branch_id': b["branch_id"]
                                          }
-    corrected_branch_id.append(branch)
-    return branch
+                    corrected_branch_id.append(branch)
+                return branch
 
 
 def basket_table(unique_prod_id_name_size, list_of_orders_with_transac_id):
@@ -242,6 +252,7 @@ def branch_location(data):
     branch_location_list = []
     branch_location_list_unique = []
     for item in data:
+        # print(item)
         branch_location = item['location']
         branch_location_list.append(branch_location)
         branch_location_list_unique = set(branch_location_list)
@@ -262,7 +273,7 @@ def amount(data):
 
 
 if __name__ == '__main__':
-    connection = create_db_connection()            
+    # connection = create_db_connection()            
     data = extract_and_remove_sensitive_data(file)
     
     list_of_all_products = cleaning(data)
