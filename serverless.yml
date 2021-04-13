@@ -49,7 +49,7 @@ package:
 functions:
   team3-etl: 
     handler: src/team3etl/handler.handle
-    timeout: 300
+    timeout: 900
     role: arn:aws:iam::505617246107:role/team-3-execution-role
     layers: 
       - !Ref PythonRequirementsLambdaLayer
@@ -59,4 +59,5 @@ functions:
           event: s3:ObjectCreated:*
           rules:
             - suffix: .csv
+    reservedConcurrency: 1
 

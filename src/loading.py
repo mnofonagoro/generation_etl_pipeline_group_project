@@ -2,6 +2,7 @@
 from src.sql_script import create_all_tables
 from src.trail import *
 from src.sql_script import *
+from datetime import datetime
 import psycopg2
 import os
 import copy
@@ -14,6 +15,7 @@ password = os.environ["PASSWORD"]
 connection = psycopg2.connect(dbname=dbname, host=host,
                            port=port, user=user, password=password)
                            
+print(connection)
                            
 def insert_into_product_table(list_not_duplicated_var, connection):
     newest_products_list = [] # populated with anything not already in the DB
@@ -61,11 +63,15 @@ def insert_into_branch_table(branch_location_w_par, connection):
                 for value in pre_existing_branch:
                     # print(branch["branch_location"])
                     print("did it work")
-                    if branch[1] == value[1]:
+                    print(branch, value[1])
+                    if branch == value[1]:
                         pre_existing1 = True
+                        print("found location match: breaking loop")
                         break
                 if pre_existing1 == False:
+                    print("no location match: appending to branch list", branch)
                     newest_branch_list.append(branch)
+                    
             
             for item in newest_branch_list:
                 # print(item)
@@ -105,8 +111,17 @@ def insert_into_basket_table(product_and_transaction_ids_var, connection):
     except Exception as e:
         print(e)
         
+# re-establish conn func
+def run_loading(file, connection=connection):
+    
+    connection_open = connection.closed == 0
+    if connection_open:
+        pass
+    else:
+        connection = psycopg2.connect(dbname=dbname, host=host,
+                                   port=port, user=user, password=password)
         
-def run_loading(file):
+    
     create_all_tables(connection)
     # create_product_table(con)
     # create_branch_table(con)
@@ -152,27 +167,35 @@ def run_loading(file):
     
     # this only works if the products table is created and populated as it depend on it to fetch the tuples.
     # global joint_two 
+    print("Starting join branches", datetime.now())
     joint_two = zipping_branch_stuff()
     # print("no7")
     #global joint_three
     joint_three = zipping_product_stuff()
+    print("finishing join branches", datetime.now())
     # print("no8")
     #global branch_id_loc
+    print("Starting branch id location conversion", datetime.now())
     branch_id_loc = convert_branch_tuple_to_dict(joint_two)
     # print("no9")
     #global corrected_branch_id 
     corrected_branch_id_var = branch_id_transaction(branch_id_loc, list_of_orders_with_branch_var)
     # print("no10")
     #global unique_prod_id_name_size
+    print("start unique product id names", datetime.now())
     unique_prod_id_name_size = convert_tuple_to_dict(joint_three)
     # print("no11")
     # global product_and_transaction_ids
     # print("before going into basket table", list_of_orders_with_transac_id_var[0])
+    
     product_and_transaction_ids_var = basket_table(unique_prod_id_name_size, list_of_orders_with_transac_id_var)
     # print("no12")
+    print("inserting into transaction table", datetime.now())
     insert_into_transaction_table(corrected_branch_id_var, our_data, connection)
     # print("no13")
+    print("inserting into basket table", datetime.now())
     insert_into_basket_table(product_and_transaction_ids_var, connection)
+    print("finished inserting into basket table", datetime.now())
     # print("no14")
     
     connection.close()

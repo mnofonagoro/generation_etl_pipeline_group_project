@@ -216,7 +216,7 @@ def branch_id_transaction(branch_id_loc, list_of_orders_with_branch):
                     branch = { 'branch_id': b["branch_id"]
                                          }
                     corrected_branch_id.append(branch)
-                return branch
+    return branch
 
 
 def basket_table(unique_prod_id_name_size, list_of_orders_with_transac_id):
