@@ -6,7 +6,7 @@ Our client has grown and expanded into multiple locations. Due to the demand tha
 # What We Did
 * This was a group project, so we discussed as a group how we were going to work at our best - what our ways of working would be, what our definition of done is, and how to get our values aligned. You can read more about this below :)
 
-* We started off our project with creating a schema (found in **schema.md**). Using data normalisation (the process of efficiently organising data in a database) - specifically 3NF, we could see what our tables would look like, and what we should remove, and how we should transform our data. The aim was to make querying as straightforward as possible.
+* We started off our project by creating a schema (found in **schema.md**). Using data normalisation (the process of efficiently organising data in a database) - specifically 3NF, we could see what our tables would look like, and what we should remove, and how we should transform our data. The aim was to make querying as straightforward as possible.
 
 * From there, we created the PostreSQL script to create our tables. We were initially connecting to a local PostreSQL database that ran on Docker, and would move onto AWS later on.
 
