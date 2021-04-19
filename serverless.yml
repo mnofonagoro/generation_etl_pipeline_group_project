@@ -60,4 +60,3 @@ functions:
           rules:
             - suffix: .csv
     reservedConcurrency: 1
-

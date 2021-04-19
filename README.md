@@ -1,5 +1,3 @@
-# Update me!
-
 # Values Alignment 
 
 ## How are we going to balance rest with work?

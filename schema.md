@@ -1,4 +1,4 @@
-## Schema: The information about the structure of the database and how things relate to each other
+## Schema: The information about the structure of the database and how things relate to each other 
 
 # Before storing our data we must design a schema for it so that we can create it in our database.
 

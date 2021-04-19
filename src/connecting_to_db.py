@@ -7,5 +7,5 @@ def create_db_connection():
                     password="password", 
                     host="172.18.0.3", 
                     port="5432"
-                    )
+                    ) 
     return connection

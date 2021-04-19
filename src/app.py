@@ -14,7 +14,7 @@ print("Your tables have been created successfully")
 
 from src.trail import *
 
-# connection = create_db_connection()            
+# connection = create_db_connection()             
 data = extract_and_remove_sensitive_data()
 list_of_all = products_from_orders(data)
 list_not_duplicated = list_no_duplicates(list_of_all)

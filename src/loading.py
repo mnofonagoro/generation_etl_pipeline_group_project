@@ -1,4 +1,4 @@
-# from connecting_to_db import create_db_connection
+# from connecting_to_db import create_db_connection 
 from src.sql_script import create_all_tables
 from src.trail import *
 from src.sql_script import *

@@ -10,7 +10,7 @@ import os
 # port = os.environ["PORT"]
 # user = os.environ["DB_USER"]
 # password = os.environ["PASSWORD"]
-# print(host)
+# print(host) 
 # print(user)
 
 s3 = boto3.client('s3')

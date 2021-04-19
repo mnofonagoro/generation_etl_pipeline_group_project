@@ -1,6 +1,6 @@
 import csv
 import os
-# from connecting_to_db import create_db_connection
+# from connecting_to_db import create_db_connection 
 import psycopg2
 
 dbname = os.environ["DB"]

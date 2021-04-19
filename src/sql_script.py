@@ -3,7 +3,7 @@
 # When I opened up my container, my IP address had changed, so this is the code to check it:
 # docker inspect team-3-project_devcontainer_postgres_1 | grep IPAddress
 
-# connection = create_db_connection()
+# connection = create_db_connection() 
 
 
 def create_product_table(connection):
