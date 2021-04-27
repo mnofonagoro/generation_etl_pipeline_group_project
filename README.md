@@ -18,7 +18,7 @@ Our client has grown and expanded into multiple locations. Due to the demand tha
 
 * After cleaning the data, we were able to populate our tables, confirming that our functions worked. It was time to move to the cloud.
 
-* We received the actual CSVs we would be using for the project, each named `**location**-**date.csv**`. So, we had to refactor our code because these new CSVs had a different format - for example, there were no more missing size values.
+* We received the actual CSVs we would be using for the project, each named `'location'-'date.csv'`. So, we had to refactor our code because these new CSVs had a different format - for example, there were no more missing size values.
 
 * We created our bucket in the `serverless.yml` file. We deployed serverless changes through the command line. 
 
