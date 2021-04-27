@@ -8,21 +8,21 @@ Our client has grown and expanded into multiple locations. Due to the demand tha
 ## What We Did
 * This was a group project, so we discussed as a group how we were going to work at our best - what our ways of working would be, what our definition of done is, and how to get our values aligned. You can read more about this below :)
 
-* We started off our project by creating a schema (found in **schema.md**). Using data normalisation (the process of efficiently organising data in a database) - specifically 3NF, we could see what our tables would look like, what we should remove, and how we should transform our data. The aim was to make querying as straightforward as possible.
+* We started off our project by creating a schema (found in `schema.md`). Using data normalisation (the process of efficiently organising data in a database) - specifically 3NF, we could see what our tables would look like, what we should remove, and how we should transform our data. The aim was to make querying as straightforward as possible.
 
 * From there, we created the PostreSQL script to create our tables. We were initially connecting to a local PostreSQL database that ran on Docker, and would move onto AWS later on.
 
 * We were given an example CSV file, replicating the type of data we would be handling later. The CSV had a lot of PII, so we created a function where we pass in the CSV as a parameter, and the name, card details and card type columns would be removed. It then returns a list of the extracted data.
 
-* We then cleaned this data: we replaced empty spaces in the size column with “standard”, and made sure each row of data had the same format. We also unit tested these functions - this can be found in our **test** folder.
+* We then cleaned this data: we replaced empty spaces in the size column with “standard”, and made sure each row of data had the same format. We also unit tested these functions - this can be found in our `test` folder.
 
 * After cleaning the data, we were able to populate our tables, confirming that our functions worked. It was time to move to the cloud.
 
-* We received the actual CSVs we would be using for the project, each named **location**-**date.csv**. So, we had to refactor our code because these new CSVs had a different format - for example, there were no more missing size values.
+* We received the actual CSVs we would be using for the project, each named `**location**-**date.csv**`. So, we had to refactor our code because these new CSVs had a different format - for example, there were no more missing size values.
 
-* We created our bucket in the **serverless.yml** file. We deployed serverless changes through the command line. 
+* We created our bucket in the `serverless.yml` file. We deployed serverless changes through the command line. 
 
-* Our handle function in **handler.py** (**src** folder --> **team3etl** folder) ran our lambda function. When triggered, the lambda would read from the bucket, and find the new CSV file. The lambda would then call **run_loading.py** (**src** folder) which runs all our code - **sql_script**, **trail.py** and **loading.py**.
+* Our handle function in `handler.py` (`src` folder --> `team3etl` folder) ran our lambda function. When triggered, the lambda would read from the bucket, and find the new CSV file. The lambda would then call `run_loading.py` (`src` folder) which runs all our code - `sql_script`, `trail.py` and `loading.py`.
 
 ### The final Process
 * We upload a CSV into our bucket, which triggers the lambda function. Then, we can check Cloudwatch Logs to monitor what functions are being executed at what time. Our code creates our tables, cleans all the data in the CSV, and inserts the clean data into our Redshift tables.
