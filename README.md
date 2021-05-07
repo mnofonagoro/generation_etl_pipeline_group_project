@@ -35,7 +35,7 @@ Our client has grown and expanded into multiple locations. Due to the demand tha
 
 *    Then, we can check Cloudwatch Logs to monitor what functions are being executed at what time:
 
-![image](https://user-images.githubusercontent.com/73751287/117475559-1935c500-af54-11eb-8855-7c0b38f4d2c2.png)
+![image](https://user-images.githubusercontent.com/73751287/117475622-31a5df80-af54-11eb-9df5-31272cac7c9a.png)
 
 * Our code creates our tables, cleans all the data in the CSV, and inserts the clean data into our Redshift tables.
 
