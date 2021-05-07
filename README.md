@@ -26,6 +26,7 @@ Our client has grown and expanded into multiple locations. Due to the demand tha
 
 ### The final Process
 * We upload a CSV into our bucket
+
 ![image](https://user-images.githubusercontent.com/73751287/117472895-49c82f80-af51-11eb-872a-6ad615a7ae47.png)
 
 *   which triggers the lambda function. Then, we can check Cloudwatch Logs to monitor what functions are being executed at what time. Our code creates our tables, cleans all the data in the CSV, and inserts the clean data into our Redshift tables.
