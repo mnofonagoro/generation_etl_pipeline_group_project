@@ -41,7 +41,9 @@ Our client has grown and expanded into multiple locations. Due to the demand tha
 
 ![image](https://user-images.githubusercontent.com/73751287/117476321-e17b4d00-af54-11eb-8626-79f959f7b00b.png)
 
-* We then set up an EC2 instance which ran Grafana on Docker. Grafana is a multi-platform open-source analytics and visualization web application. It provides charts, graphs, and alerts for the web when connected to supported data sources. We only had time to create one table, which showed the most popular products across all stores (which was the chai latte).
+* After this, we set up an EC2 instance which ran Grafana on Docker. Grafana is a multi-platform open-source analytics and visualization web application. It provides charts, graphs, and alerts for the web when connected to supported data sources. We only had time to create one table, which showed the most popular products across all stores (which was the chai latte):
+
+![image](https://user-images.githubusercontent.com/73751287/117476920-4afb5b80-af55-11eb-874d-52c6b444ebeb.png)
 
 ## If we had more time
 * More refactoring
