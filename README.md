@@ -33,11 +33,13 @@ Our client has grown and expanded into multiple locations. Due to the demand tha
 
 ![image](https://user-images.githubusercontent.com/73751287/117473835-4aad9100-af52-11eb-831a-122631558e16.png)
 
-*    Then, we can check Cloudwatch Logs to monitor what functions are being executed at what time:
+* We can then check Cloudwatch Logs to monitor what functions are being executed at what time:
 
 ![image](https://user-images.githubusercontent.com/73751287/117475836-6dd94000-af54-11eb-99ed-7746beb6af0e.png)
 
-* Our code creates our tables, cleans all the data in the CSV, and inserts the clean data into our Redshift tables.
+* Our code creates our tables, cleans all the data in the CSV, and inserts the clean data into our Redshift tables:
+
+![image](https://user-images.githubusercontent.com/73751287/117476321-e17b4d00-af54-11eb-8626-79f959f7b00b.png)
 
 * We then set up an EC2 instance which ran Grafana on Docker. Grafana is a multi-platform open-source analytics and visualization web application. It provides charts, graphs, and alerts for the web when connected to supported data sources. We only had time to create one table, which showed the most popular products across all stores (which was the chai latte).
 
