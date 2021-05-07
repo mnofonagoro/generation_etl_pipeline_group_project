@@ -8,6 +8,8 @@ Our client has grown and expanded into multiple locations. Due to the demand tha
 ## What We Did
 * This was a group project, so we discussed as a group how we were going to work at our best - what our ways of working would be, what our definition of done is, and how to get our values aligned. You can read more about this below :)
 
+* Initially, we split up our tasks among ourselves. However, we gradually transitioned into doing all theasks together, because we wanted to understand every aspect of the project - especially when it came to the AWS tasks.
+
 * We started off our project by creating a schema (found in `schema.md`). Using data normalisation (the process of efficiently organising data in a database) - specifically 3NF, we could see what our tables would look like, what we should remove, and how we should transform our data. The aim was to make querying as straightforward as possible.
 
 ![image](https://user-images.githubusercontent.com/73751287/117478851-957dd780-af57-11eb-86dc-8027b8bb76c9.png)
