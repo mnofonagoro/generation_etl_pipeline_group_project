@@ -20,7 +20,7 @@ Our client has grown and expanded into multiple locations. Due to the demand tha
 
 ![image](https://user-images.githubusercontent.com/73751287/117479884-c4e11400-af58-11eb-891b-5c356d8a03df.png)
 
-* We then cleaned this data: we replaced empty spaces in the size column with “standard”, and made sure each row of data had the same format. 
+* We then cleaned this data. Here is a function that replaces empty spaces in the size column with “standard”, and makes sure each row of data has the same format: 
 
 ![image](https://user-images.githubusercontent.com/73751287/117480019-f35eef00-af58-11eb-9ef5-e41fae490baf.png)
 
