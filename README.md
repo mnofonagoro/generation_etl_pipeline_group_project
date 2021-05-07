@@ -27,7 +27,7 @@ Our client has grown and expanded into multiple locations. Due to the demand tha
 ### The final Process
 * We upload a CSV into our S3 bucket:
 
-![image](https://user-images.githubusercontent.com/73751287/117473360-c824d180-af51-11eb-8e63-3a6501ea8940.png)
+![image](https://user-images.githubusercontent.com/73751287/117473622-10dc8a80-af52-11eb-8b66-1a2d77f6b1aa.png)
 
 * This triggers the lambda function:
 
