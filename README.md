@@ -1,5 +1,7 @@
 # ETL Pipeline Project :)
 
+### I've uploaded a Word document named `AWS Screenshots`. This is a file that has all of the screenshots I've used in this README.md, but in better quality
+
 ## Overview
 Our client has grown and expanded into multiple locations. Due to the demand that the company is receiving, they need to figure out how they can best target new and returning customers, and understand which products are selling well. They are experiencing issues with collating and analysing the data they are producing at each branch, as their technical setup is limited. 
 
