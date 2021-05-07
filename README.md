@@ -10,11 +10,21 @@ Our client has grown and expanded into multiple locations. Due to the demand tha
 
 * We started off our project by creating a schema (found in `schema.md`). Using data normalisation (the process of efficiently organising data in a database) - specifically 3NF, we could see what our tables would look like, what we should remove, and how we should transform our data. The aim was to make querying as straightforward as possible.
 
-* From there, we created the PostreSQL script to create our tables. We were initially connecting to a local PostreSQL database that ran on Docker, and would move onto AWS later on.
+![image](https://user-images.githubusercontent.com/73751287/117478851-957dd780-af57-11eb-86dc-8027b8bb76c9.png)
 
-* We were given an example CSV file, replicating the type of data we would be handling later. The CSV had a lot of PII, so we created a function where we pass in the CSV as a parameter, and the name, card details and card type columns would be removed. It then returns a list of the extracted data.
+* From there, we created the PostreSQL script to create our tables. This can be found in `sql_script.py` (`src` folder --> `team3etl` folder). We were initially connecting to a local PostreSQL database that ran on Docker, and would move onto AWS later on.
 
-* We then cleaned this data: we replaced empty spaces in the size column with “standard”, and made sure each row of data had the same format. We also unit tested these functions - this can be found in our `test` folder.
+![image](https://user-images.githubusercontent.com/73751287/117479317-176e0080-af58-11eb-888d-41bc021e6fec.png)
+
+* We were given an example CSV file, `2021-02-23-isle-of-wight.csv`, replicating the type of data we would be handling later. The CSV had a lot of PII, so we created a function where we pass in the CSV as a parameter, and the name, card details and card type columns would be removed. It then returns a list of the extracted data.
+
+![image](https://user-images.githubusercontent.com/73751287/117479884-c4e11400-af58-11eb-891b-5c356d8a03df.png)
+
+* We then cleaned this data: we replaced empty spaces in the size column with “standard”, and made sure each row of data had the same format. 
+
+![image](https://user-images.githubusercontent.com/73751287/117480019-f35eef00-af58-11eb-9ef5-e41fae490baf.png)
+
+* We also unit tested these functions - this can be found in our `test` folder.
 
 * After cleaning the data, we were able to populate our tables, confirming that our functions worked. It was time to move to the cloud.
 
