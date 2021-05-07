@@ -25,7 +25,10 @@ Our client has grown and expanded into multiple locations. Due to the demand tha
 * Our handle function in `handler.py` (`src` folder --> `team3etl` folder) ran our lambda function. When triggered, the lambda would read from the bucket, and find the new CSV file. The lambda would then call `run_loading.py` (`src` folder) which runs all our code - `sql_script`, `trail.py` and `loading.py`.
 
 ### The final Process
-* We upload a CSV into our bucket, which triggers the lambda function. Then, we can check Cloudwatch Logs to monitor what functions are being executed at what time. Our code creates our tables, cleans all the data in the CSV, and inserts the clean data into our Redshift tables.
+* We upload a CSV into our bucket
+![image](https://user-images.githubusercontent.com/73751287/117472895-49c82f80-af51-11eb-872a-6ad615a7ae47.png)
+
+*   which triggers the lambda function. Then, we can check Cloudwatch Logs to monitor what functions are being executed at what time. Our code creates our tables, cleans all the data in the CSV, and inserts the clean data into our Redshift tables.
 
 * We then set up an EC2 instance which ran Grafana on Docker. Grafana is a multi-platform open-source analytics and visualization web application. It provides charts, graphs, and alerts for the web when connected to supported data sources. We only had time to create one table, which showed the most popular products across all stores (which was the chai latte).
 
