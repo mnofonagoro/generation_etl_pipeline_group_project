@@ -1,5 +1,7 @@
 # ETL Pipeline Project :)
 
+### I've uploaded a Word document named `AWS Screenshots`. This is a file that has all of the screenshots I've used in this README.md, but in better quality
+
 ## Overview
 Our client has grown and expanded into multiple locations. Due to the demand that the company is receiving, they need to figure out how they can best target new and returning customers, and understand which products are selling well. They are experiencing issues with collating and analysing the data they are producing at each branch, as their technical setup is limited. 
 
@@ -8,26 +10,54 @@ Our client has grown and expanded into multiple locations. Due to the demand tha
 ## What We Did
 * This was a group project, so we discussed as a group how we were going to work at our best - what our ways of working would be, what our definition of done is, and how to get our values aligned. You can read more about this below :)
 
-* We started off our project by creating a schema (found in **schema.md**). Using data normalisation (the process of efficiently organising data in a database) - specifically 3NF, we could see what our tables would look like, what we should remove, and how we should transform our data. The aim was to make querying as straightforward as possible.
+* Initially, we split up our tasks among ourselves. However, we gradually transitioned into doing all the tasks together, because we wanted to understand every aspect of the project - especially when it came to the AWS tasks.
 
-* From there, we created the PostreSQL script to create our tables. We were initially connecting to a local PostreSQL database that ran on Docker, and would move onto AWS later on.
+* We started off our project by creating a schema (found in `schema.md`). Using data normalisation (the process of efficiently organising data in a database) - specifically 3NF, we could see what our tables would look like, what we should remove, and how we should transform our data. The aim was to make querying as straightforward as possible.
 
-* We were given an example CSV file, replicating the type of data we would be handling later. The CSV had a lot of PII, so we created a function where we pass in the CSV as a parameter, and the name, card details and card type columns would be removed. It then returns a list of the extracted data.
+![image](https://user-images.githubusercontent.com/73751287/117478851-957dd780-af57-11eb-86dc-8027b8bb76c9.png)
 
-* We then cleaned this data: we replaced empty spaces in the size column with “standard”, and made sure each row of data had the same format. We also unit tested these functions - this can be found in our **test** folder.
+* From there, we created the PostreSQL script to create our tables. This can be found in `sql_script.py` (`src` folder --> `team3etl` folder). We were initially connecting to a local PostreSQL database that ran on Docker, and would move onto AWS later on.
+
+![image](https://user-images.githubusercontent.com/73751287/117479317-176e0080-af58-11eb-888d-41bc021e6fec.png)
+
+* We were given an example CSV file, `2021-02-23-isle-of-wight.csv`, replicating the type of data we would be handling later. The CSV had a lot of PII, so we created a function where we pass in the CSV as a parameter, and the name, card details and card type columns would be removed. It then returns a list of the extracted data.
+
+![image](https://user-images.githubusercontent.com/73751287/117479884-c4e11400-af58-11eb-891b-5c356d8a03df.png)
+
+* We then cleaned this data. Here is a function that replaces empty spaces in the size column with “standard”, and makes sure each row of data has the same format: 
+
+![image](https://user-images.githubusercontent.com/73751287/117480019-f35eef00-af58-11eb-9ef5-e41fae490baf.png)
+
+* We also unit tested these functions - this can be found in our `test` folder.
 
 * After cleaning the data, we were able to populate our tables, confirming that our functions worked. It was time to move to the cloud.
 
-* We received the actual CSVs we would be using for the project, each named **location**-**date.csv**. So, we had to refactor our code because these new CSVs had a different format - for example, there were no more missing size values.
+* We received the actual CSVs we would be using for the project, each named `'location'-'date'.csv`. So, we had to refactor our code because these new CSVs had a different format - for example, there were no more missing size values.
 
-* We created our bucket in the **serverless.yml** file. We deployed serverless changes through the command line. 
+* We created our bucket in the `serverless.yml` file. We deployed serverless changes through the command line. 
 
-* Our handle function in **handler.py** (**src** folder --> **team3etl** folder) ran our lambda function. When triggered, the lambda would read from the bucket, and find the new CSV file. The lambda would then call **run_loading.py** (**src** folder) which runs all our code - **sql_script**, **trail.py** and **loading.py**.
+* Our handle function in `handler.py` (`src` folder --> `team3etl` folder) ran our lambda function. When triggered, the lambda would read from the bucket, and find the new CSV file. The lambda would then call `run_loading.py` (`src` folder) which runs all our code - `sql_script`, `trail.py` and `loading.py`.
 
 ### The final Process
-* We upload a CSV into our bucket, which triggers the lambda function. Then, we can check Cloudwatch Logs to monitor what functions are being executed at what time. Our code creates our tables, cleans all the data in the CSV, and inserts the clean data into our Redshift tables.
+* We upload a CSV into our S3 bucket:
 
-* We then set up an EC2 instance which ran Grafana on Docker. Grafana is a multi-platform open-source analytics and visualization web application. It provides charts, graphs, and alerts for the web when connected to supported data sources. We only had time to create one table, which showed the most popular products across all stores (which was the chai latte).
+![image](https://user-images.githubusercontent.com/73751287/117473622-10dc8a80-af52-11eb-8b66-1a2d77f6b1aa.png)
+
+* This triggers the lambda function:
+
+![image](https://user-images.githubusercontent.com/73751287/117473835-4aad9100-af52-11eb-831a-122631558e16.png)
+
+* We can then check Cloudwatch Logs to monitor what functions are being executed at what time:
+
+![image](https://user-images.githubusercontent.com/73751287/117475836-6dd94000-af54-11eb-99ed-7746beb6af0e.png)
+
+* Our code creates our tables, cleans all the data in the CSV, and inserts the clean data into our Redshift tables:
+
+![image](https://user-images.githubusercontent.com/73751287/117476321-e17b4d00-af54-11eb-8626-79f959f7b00b.png)
+
+* After this, we set up an EC2 instance which ran Grafana on Docker. Grafana is a multi-platform open-source analytics and visualization web application. It provides charts, graphs, and alerts for the web when connected to supported data sources. We only had time to create one table, which showed the most popular products across all stores (which was the chai latte):
+
+![image](https://user-images.githubusercontent.com/73751287/117476920-4afb5b80-af55-11eb-874d-52c6b444ebeb.png)
 
 ## If we had more time
 * More refactoring
